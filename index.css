@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.game-border {
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #3b82f6, #ec4899, #8b5cf6) 1;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.combat-grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.combat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 4px;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+}
+
+.grid-cell {
+  aspect-ratio: 1;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  background: rgba(30, 41, 59, 0.8);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.grid-cell:hover {
+  border-color: rgba(59, 130, 246, 0.8);
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.grid-cell.occupied {
+  position: relative;
+}
+
+.grid-cell.player-occupied {
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.5);
+}
+
+.grid-cell.enemy-occupied {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.5);
+}
+
+.grid-cell.selected {
+  background: rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.8);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+}
+
+.grid-cell.move-range {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.6);
+}
+
+.grid-cell.attack-range {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+.grid-cell.hover-cell {
+  border-width: 3px;
+}
+
+.grid-cell.hazard-cell {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.character-token {
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.player-token {
+  background: rgba(37, 99, 235, 0.7);
+  border: 2px solid rgba(59, 130, 246, 0.8);
+}
+
+.enemy-token {
+  background: rgba(220, 38, 38, 0.7);
+  border: 2px solid rgba(239, 68, 68, 0.8);
+}
+
+.character-portrait {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.character-portrait:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+}
+
+.hp-bar {
+  height: 8px;
+  background: linear-gradient(90deg, #ef4444, #f97316, #eab308);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.skill-button {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  transition: all 0.3s ease;
+}
+
+.skill-button:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.skill-button:disabled {
+  background: linear-gradient(135deg, #64748b, #475569);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rarity-1 { border-color: #64748b; }
+.rarity-2 { border-color: #10b981; }
+.rarity-3 { border-color: #3b82f6; }
+.rarity-4 { border-color: #8b5cf6; }
+.rarity-5 { border-color: #f59e0b; }
+
+.gacha-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fbbf24;
+  border-radius: 50%;
+  animation: sparkle 1.5s linear infinite;
+}
+
+.story-text {
+  line-height: 1.8;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .combat-grid {
+    max-width: 300px;
+  }
+  
+  .character-portrait {
+    width: 60px;
+    height: 60px;
+  }
+}
